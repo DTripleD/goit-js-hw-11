@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+}
+
+
 .visually-hidden {
     white-space: nowrap;
     width: 1px;
@@ -28,9 +33,11 @@
 
 .gallery{
     flex-wrap: wrap;
+    padding: 50px;
     padding-top: 100px;
     display: flex;
     gap: 15px;
+
 }
 
 .info{
@@ -69,5 +76,34 @@ p{
     padding: 6px 18px;
     display: flex;
     margin: 30px auto;
+}
+
+header{
+    padding: 20px;
+    background: rgba(216, 183, 250, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+.search-form{
+    display: flex;
+    justify-content: center;
+}
+
+.form__btn{
+    color: #FFFFFF;
+    background-color: #04AA6D;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 6px 18px;
+    display: flex;
+    margin-left: 30px;
+}
+
+input{
+    border-radius: 5px;
 }
 

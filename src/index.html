@@ -8,22 +8,28 @@
     <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body>
-    <form class="search-form" id="search-form" type="text">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
-      <button type="submit">Search</button>
-    </form>
+    <header>
+      <form class="search-form" id="search-form" type="text">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button type="submit" class="form__btn">Search</button>
+      </form>
+    </header>
+    <body>
+      <div class="gallery">
+        <!-- Картки зображень -->
+      </div>
+  
+      <button type="button" class="load-more visually-hidden">Load more</button>
+    </body>
 
 
-    <div class="gallery">
-      <!-- Картки зображень -->
-    </div>
 
-    <button type="button" class="load-more visually-hidden">Load more</button>
+
 
     <script src="index.js" type="module"></script>
   </body>
