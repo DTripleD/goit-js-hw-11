@@ -28,9 +28,7 @@ function onSearch(event) {
   }
 
   onMakingMarkup();
-
 }
-
 
 async function onMakingMarkup() {
   loadMore.classList.add('visually-hidden');
@@ -62,7 +60,16 @@ async function onMakingMarkup() {
     return loadMore.classList.add('visually-hidden');
   }
 
+  if (gallery.children.length > getData.PER_PAGE) {
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
 
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
 }
 
 function markup(data) {
