@@ -7,10 +7,14 @@ const getData = new GetData();
 
 const formEl = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
-const loadMore = document.querySelector('.load-more');
+
+//-------------------------IF YOU NEED 'LOAD MORE' BUTTON
+// const loadMore = document.querySelector('.load-more');
 
 formEl.addEventListener('submit', onSearch);
-loadMore.addEventListener('click', onMakingMarkup);
+
+//-------------------------IF YOU NEED 'LOAD MORE' BUTTON
+// loadMore.addEventListener('click', onMakingMarkup);
 
 function onSearch(event) {
   event.preventDefault();
@@ -31,7 +35,8 @@ function onSearch(event) {
 }
 
 async function onMakingMarkup() {
-  loadMore.classList.add('visually-hidden');
+  //-------------------------IF YOU NEED 'LOAD MORE' BUTTON
+  // loadMore.classList.add('visually-hidden');
   const response = await getData.onFetch();
   const { hits, totalHits } = response;
 
@@ -49,27 +54,31 @@ async function onMakingMarkup() {
 
   markup(hits);
 
-  if (gallery.children.length < totalHits) {
-    loadMore.classList.remove('visually-hidden');
-  }
+  //-------------------------IF YOU NEED 'LOAD MORE' BUTTON
+  // if (gallery.children.length < totalHits) {
+  //   loadMore.classList.remove('visually-hidden');
+  // }
 
   if (gallery.children.length >= totalHits) {
     Notiflix.Notify.warning(
       "We're sorry, but you've reached the end of search results."
     );
-    return loadMore.classList.add('visually-hidden');
+    //-------------------------IF YOU NEED 'LOAD MORE' BUTTON
+    // return loadMore.classList.add('visually-hidden');
   }
 
-  if (gallery.children.length > getData.PER_PAGE) {
-    const { height: cardHeight } = document
-      .querySelector('.gallery')
-      .firstElementChild.getBoundingClientRect();
+  //-------------------------IF YOU NEED 'LOAD MORE' BUTTON
 
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
-  }
+  // if (gallery.children.length > getData.PER_PAGE) {
+  //   const { height: cardHeight } = document
+  //     .querySelector('.gallery')
+  //     .firstElementChild.getBoundingClientRect();
+
+  //   window.scrollBy({
+  //     top: cardHeight * 2,
+  //     behavior: 'smooth',
+  //   });
+  // }
 }
 
 function markup(data) {
@@ -114,3 +123,22 @@ function markup(data) {
   gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
+
+
+const onEntry = (entries) => {
+  entries.forEach((entry) => {
+      if (entry.isIntersecting && getData.searchQuery !== "") {
+          onMakingMarkup();
+      }
+  });
+};
+
+const options = {
+  rootMargin: "200px"
+};
+
+const observer = new IntersectionObserver(onEntry, options);
+
+const sentinel = document.querySelector('#sentinel');
+
+observer.observe(sentinel);
