@@ -3,10 +3,18 @@ import GetData from './js/fetch';
 import { lightbox } from './js/lightbox';
 import Notiflix from 'notiflix';
 
-const getData = new GetData();
+const options = {
+  rootMargin: '200px',
+};
 
 const formEl = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
+const sentinel = document.querySelector('#sentinel');
+
+const getData = new GetData();
+const observer = new IntersectionObserver(onEntry, options);
+
+observer.observe(sentinel);
 
 //-------------------------IF YOU NEED 'LOAD MORE' BUTTON
 // const loadMore = document.querySelector('.load-more');
@@ -124,21 +132,10 @@ function markup(data) {
   lightbox.refresh();
 }
 
-
-const onEntry = (entries) => {
-  entries.forEach((entry) => {
-      if (entry.isIntersecting && getData.searchQuery !== "") {
-          onMakingMarkup();
-      }
+function onEntry(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && getData.searchQuery !== '') {
+      onMakingMarkup();
+    }
   });
-};
-
-const options = {
-  rootMargin: "200px"
-};
-
-const observer = new IntersectionObserver(onEntry, options);
-
-const sentinel = document.querySelector('#sentinel');
-
-observer.observe(sentinel);
+}
